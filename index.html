@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diwali Surprise from Sagnik</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+            background: black;
+            overflow: hidden;
+        }
+
+        .wrapper {
+            height: 200px;
+            width: 300px;
+            background-color: #3760C9;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .lid {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            border-right: 150px solid transparent;
+            border-bottom: 100px solid transparent;
+            border-left: 150px solid transparent;
+            transform-origin: top;
+            transition: transform 0.25s linear;
+        }
+
+        .lid.one {
+            border-top: 100px solid #658ced;
+            transform: rotateX(0deg);
+            z-index: 3;
+            transition-delay: 0.75s;
+        }
+
+        .lid.two {
+            border-top: 100px solid #3760C9;
+            transform: rotateX(90deg);
+            z-index: 1;
+            transition-delay: 0.5s;
+        }
+
+        .envelope {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            border-top: 100px solid transparent;
+            border-right: 150px solid #C4DFF0;
+            border-bottom: 100px solid #C4DFF0;
+            border-left: 150px solid #a4d4f2;
+            z-index: 3;
+        }
+
+        .letter {
+            position: absolute;
+            top: 0;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle at center, #ffcc00 0%, #ff4500 70%, #8b0000 100%);
+            border: 3px dashed #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7), inset 0 0 10px rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            z-index: 2;
+            transition: transform 0.5s, opacity 0.5s;
+            padding: 20px;
+            text-align: center;
+            color: #ffffff;
+            opacity: 0;
+        }
+
+        body.open .letter {
+            transform: translateY(-100px);
+            opacity: 1;
+            transition-delay: 0.5s;
+        }
+
+        .letter h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 28px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: #ffd700;
+        }
+
+        .letter p {
+            font-family: 'Satisfy', cursive;
+            font-size: 18px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .letter::before {
+            content: '✨';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
+            animation: sparkle 2s infinite;
+        }
+
+        .letter::after {
+            content: '✨';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 20px;
+            animation: sparkle 2s infinite 1s;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .envelope-text {
+            position: absolute;
+            top: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            width: 300px;
+            z-index: 10;
+        }
+
+        body.open .lid.one {
+            transform: rotateX(90deg);
+            transition-delay: 0s;
+        }
+
+        body.open .lid.two {
+            transform: rotateX(180deg);
+            transition-delay: 0.25s;
+        }
+
+        /* Diya CSS */
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&Satisfy&display=swap');
+        .diya-container {
+            position: absolute;
+            left: 50%;
+            top: 80%;
+            transform: translate(-50%, -50%);
+            display: none;
+            z-index: 5;
+        }
+
+        body.open .diya-container {
+            display: block;
+        }
+
+        .diya {
+            width: 200px;
+            height: 100px;
+            background: #ff3838;
+            border-bottom-left-radius: 100px;
+            border-bottom-right-radius: 100px;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .diya:before {
+            position: absolute;
+            content: "";
+            width: 200px;
+            height: 60px;
+            background: #f1c40f;
+            border-radius: 50%;
+            border: 10px solid #222;
+            box-sizing: border-box;
+            top: -30px;
+        }
+
+        .diya:after {
+            position: absolute;
+            content: "";
+            width: 50px;
+            height: 150px;
+            background: #f1c40f;
+            border-radius: 50%;
+            bottom: 90%;
+            box-shadow: 0px 0px 30px #f1c40f, 0px 0px 50px #f1c40f;
+            animation: animate 2s ease infinite;
+            transform-origin: bottom;
+        }
+
+        @keyframes animate {
+            0% { transform: scaleY(1); }
+            50% { transform: scaleY(1.07) scaleX(1.05); }
+            100% { transform: scaleY(1); }
+        }
+
+        /* Rangoli CSS */
+        .wrap {
+            transform: rotate(125deg);
+            width: 0;
+            height: 0;
+            margin: 0 auto;
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(125deg);
+            display: none;
+            z-index: 5;
+        }
+
+        body.open .wrap {
+            display: block;
+        }
+
+        .circle {
+            box-shadow: inset 0px 0px 30px 30px violet, -20px 20px 7px 10px indigo, -40px 40px 7px 10px blue, -60px 60px 10px 10px green, -80px 80px 7px 10px white, -100px 100px 10px 30px yellow, -120px 120px 30px 30px orange, -140px 140px 10px 30px red, -160px 160px 10px 30px darkred, -180px 180px 10px 40px #ddaadd;
+            transform: rotate(20deg);
+            animation: myanim 15s ease-in-out infinite;
+        }
+
+        @keyframes myanim {
+            10%, 30% { transform: rotate(10deg); }
+            20%, 40%, 100% { transform: rotate(20deg); }
+            60% { transform: rotate(0deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper" id="wrapper">
+        <div class="lid one"></div>
+        <div class="lid two"></div>
+        <div class="envelope"></div>
+        <div class="letter">
+            <h2>Happy Diwali!</h2>
+            <p>Wishes from Sagnik</p>
+        </div>
+    </div>
+    <div class="envelope-text">Sagnik has a surprise for you. Open it and thank Sagnik for this!</div>
+    <div class="diya-container">
+        <div class="diya"></div>
+    </div>
+    <div class="wrap">
+        <div class="circle">
+            <div class="circle">
+                <div class="circle">
+                    <div class="circle">
+                        <div class="circle">
+                            <div class="circle">
+                                <div class="circle">
+                                    <div class="circle">
+                                        <div class="circle">
+                                            <div class="circle">
+                                                <div class="circle">
+                                                    <div class="circle">
+                                                        <div class="circle">
+                                                            <div class="circle">
+                                                                <div class="circle">
+                                                                    <div class="circle">
+                                                                        <div class="circle">
+                                                                            <div class="circle">
+                                                                                <div class="circle"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <audio id="firework-sound" loop>
+        <source src="Sound1.mp3" type="audio/mpeg">
+        <source src="Sound1.ogg" type="audio/ogg">
+        Your browser does not support the audio element. Please try a different browser.
+    </audio>
+    <audio id="music" loop>
+        <source src="Sound2.mp3" type="audio/mpeg">
+        <source src="Sound2.ogg" type="audio/ogg">
+        Your browser does not support the audio element. Please try a different browser.
+    </audio>
+    <script>
+        const wrapper = document.getElementById('wrapper');
+        wrapper.addEventListener('click', () => {
+            console.log('Envelope clicked, adding open class');
+            document.body.classList.add('open');
+            const fireworkAudio = document.getElementById('firework-sound');
+            const musicAudio = document.getElementById('music');
+            fireworkAudio.play().catch(error => console.error('Firework audio error:', error));
+            musicAudio.play().catch(error => console.error('Music audio error:', error));
+        });
+    </script>
+</body>
+</html>
