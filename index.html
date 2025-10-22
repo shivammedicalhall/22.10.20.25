@@ -20,6 +20,7 @@
             font-family: sans-serif;
             background: black;
             overflow: hidden;
+            padding-bottom: 50px; /* Space for footer */
         }
 
         .wrapper {
@@ -239,6 +240,30 @@
             20%, 40%, 100% { transform: rotate(20deg); }
             60% { transform: rotate(0deg); }
         }
+
+        /* Footer CSS */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 69, 0, 0.8); /* Orange with transparency */
+            color: #ffd700; /* Gold text */
+            text-align: center;
+            padding: 10px 0;
+            font-family: 'Satisfy', cursive;
+            font-size: 16px;
+            z-index: 15; /* Above diya and rangoli */
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        #visitor-count {
+            font-weight: bold;
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
@@ -304,7 +329,18 @@
         <source src="Sound2.ogg" type="audio/ogg">
         Your browser does not support the audio element. Please try a different browser.
     </audio>
+    <footer>
+        <p>Total Visitors: <span id="visitor-count">0</span></p>
+        <p>Copyright 2025, Made with ❤️ by Sagnik, Your maybe desired child!</p>
+    </footer>
     <script>
+        // Visitor counter using localStorage
+        // Note: This counts visits per browser. For a global counter, use a backend like Firebase.
+        let visitorCount = localStorage.getItem('visitorCount') || 0;
+        visitorCount = parseInt(visitorCount) + 1;
+        localStorage.setItem('visitorCount', visitorCount);
+        document.getElementById('visitor-count').textContent = visitorCount;
+
         const wrapper = document.getElementById('wrapper');
         wrapper.addEventListener('click', () => {
             console.log('Envelope clicked, adding open class');
